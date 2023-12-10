@@ -1,12 +1,17 @@
-Z3JvdXBlZExpc3QgPSAoTGlzdClncm91cGVkTWFwLmdldChjYXRlZ29yeUNvZGUpOw==
-aWYgKGdyb3VwZWRMaXN0PT1udWxsKSB7
-CWdyb3VwZWRMaXN0ID0gbmV3IEFycmF5TGlzdDxTdHJpbmc+KCk7
-fQ==
-U3RyaW5nIGxpbWl0ID0gWG1sUGFyc2VyLmdldFRhZ1ZhbHVlKHhtbFJlY29yZCwgRmFjaWxpdHlTdW1tYXJ5SGVscGVyLkNTX0xJTUlUKTs=
-aWYgKCFGdW5kc0hlbHBlci5mb3JtYXRBbW91bnQoIjAuMCIsIGN1cnJlbmN5KS5lcXVhbHMobGltaXQp
-CXx8
-CVV0aWxzLmV4aXN0c0luQ29uZmlnRm9yS2V5KENPTkZJRywgU3RyaW5nS2V5cy5GQUNJTElUWV9BRERfWkVST19MSU1JVF9GT1IsIHRhcmdldC5nZXRFbnRpdHlJZCgpKQ==
-KSB7
-CQlncm91cGVkTGlzdC5hZGQoeG1sUmVjb3JkKTs=
-CQlncm91cGVkTWFwLnB1dChjYXRlZ29yeUNvZGUsIGdyb3VwZWRMaXN0KTs=
-fQ==
+-- Assuming that your object is present in InputRoot.JSON.Object
+SET ObjectRef = InputRoot.JSON.Object;
+
+-- Iterate over the keys of the object
+WHILE LASTMOVE(ObjectRef) DO
+    SET KeyName = NAMEOF(ObjectRef);
+    
+    -- Your logic for each key goes here
+    -- For example, print the key
+    -- You can access the corresponding value using ObjectRef.{KeyName}
+
+    -- Print the key
+    SET OutputRoot.Properties.Message = 'Key: ' || KeyName;
+
+    -- Move to the next key
+    MOVE ObjectRef NEXTSIBLING;
+END WHILE;
