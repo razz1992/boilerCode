@@ -1,17 +1,22 @@
--- Assuming that your object is present in InputRoot.JSON.Object
-SET ObjectRef = InputRoot.JSON.Object;
+create field Environment.x.y.z;
+		set Environment.x.y.z.a1 = 'a1 --value';
+		set Environment.x.y.z.a2 = 'a2 --value';
+		set Environment.x.y.z.a3 = 'a3 --value';
+		set Environment.x.y.z.a4 = 'a4 --value';
+		set Environment.x.y.z.a5 = 'a5 --value';
+		set Environment.x.y.z.a6 = 'a6 --value';
 
--- Iterate over the keys of the object
-WHILE LASTMOVE(ObjectRef) DO
-    SET KeyName = NAMEOF(ObjectRef);
-    
-    -- Your logic for each key goes here
-    -- For example, print the key
-    -- You can access the corresponding value using ObjectRef.{KeyName}
+		declare xFldName character;
 
-    -- Print the key
-    SET OutputRoot.Properties.Message = 'Key: ' || KeyName;
+--		SET xFldName = FIELDNAME(Environment.x.y.z) ;
+--		SET OutputRoot.JSON.Data.{xFldName} = xFldName;
 
-    -- Move to the next key
-    MOVE ObjectRef NEXTSIBLING;
-END WHILE;
+		DECLARE currentNode REFERENCE TO Environment.x.y.z.*[1];	
+		WHILE LASTMOVE(currentNode) DO
+			DECLARE nodeName CHAR;
+			SET nodeName = FIELDNAME(currentNode);			
+			SET OutputRoot.JSON.Data.{nodeName} = FIELDVALUE(currentNode);
+		
+
+			MOVE currentNode NEXTSIBLING;
+		END WHILE;
